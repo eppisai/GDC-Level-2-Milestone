@@ -42,7 +42,7 @@ Every item should be printed on a new line. with the following format
 Example:
 
 ```
-$ ./tasks ls
+$ python tasks.py ls
 1. change light bulb [2]
 2. water the plants [5]
 ```
@@ -54,7 +54,7 @@ index starts from 1, this is used to identify a particular task to complete or d
 Use the add command. The text of the task should be enclosed within double quotes (otherwise only the first word is considered as the item text, and the remaining words are treated as different arguments).
 
 ```
-$ ./tasks add 5 "the thing i need to do"
+$ python tasks.py add 5 "the thing i need to do"
 Added task: "the thing i need to do" with priority 5
 ```
 
@@ -63,14 +63,14 @@ Added task: "the thing i need to do" with priority 5
 Use the del command to remove an item by its priority.
 
 ```
-$ ./tasks delete 3
+$ python tasks.py delete 3
 Deleted item with priority 3
 ```
 
 Attempting to delete a non-existent item should display an error message.
 
 ```
-$ ./tasks delete 5
+$ python tasks.py delete 5
 Error: item with priority 5 does not exist. Nothing deleted.
 ```
 
@@ -79,14 +79,14 @@ Error: item with priority 5 does not exist. Nothing deleted.
 Use the done command to mark an item as completed by its priority.
 
 ```
-$ ./tasks done 1
+$ python tasks.py done 1
 Marked item as done.
 ```
 
 Attempting to mark a non-existed item as completed will display an error message.
 
 ```
-$ ./tasks done 5
+$ python tasks.py done 5
 Error: no incomplete item with priority 5 exists.
 ```
 
@@ -95,7 +95,7 @@ Error: no incomplete item with priority 5 exists.
 Show the number of complete and incomplete items in the list. and the complete and incomplete items grouped together.
 
 ```
-$ ./tasks report
+$ python tasks.py report
 Pending : 2
 1. this is a pending task [1]
 2. this is a pending task with priority [4]
