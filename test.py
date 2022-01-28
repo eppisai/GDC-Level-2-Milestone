@@ -59,7 +59,7 @@ class SimpleTest(unittest.TestCase):
             self.command_object.report()
         elif command == "help":
             self.command_object.help()
-        self.assertIn(expected_output, mock_stdout.getvalue())
+        self.assertIn(expected_output, mock_stdout.getvalue().strip())
 
     def test_add_tasks(self):
         self.assert_stdout("add",["5", "Test Task 5"], "Added task: \"Test Task 5\" with priority 5")
