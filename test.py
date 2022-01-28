@@ -59,7 +59,7 @@ class SimpleTest(unittest.TestCase):
             self.command_object.report()
         elif command == "help":
             self.command_object.help()
-        self.assertIn(expected_output, mock_stdout.getvalue())
+        self.assertIn(expected_output, mock_stdout.getvalue().strip())
 
     def test_add_tasks(self):
         self.assert_stdout("add",["5", "Test Task 5"], "Added task: \"Test Task 5\" with priority 5")
@@ -76,7 +76,7 @@ class SimpleTest(unittest.TestCase):
         self.assert_stdout("add", ["10", "Task 10"], "Added task: \"Task 10\" with priority 10")
         self.assert_stdout("done", ["10"], "Marked item as done.")
         tasks = load_tasks_file()
-        self.assertFalse("10" in tasks)
+        self.assertFalse(10 in tasks)
         completed = load_completed_file()
         self.assertTrue("Task 10" in completed)
 
@@ -87,7 +87,7 @@ class SimpleTest(unittest.TestCase):
         self.assert_stdout("add", ["15", "Task 15"], "Added task: \"Task 15\" with priority 15")
         self.assert_stdout("delete", ["15"], "Deleted item with priority 15")
         tasks = load_tasks_file()
-        self.assertFalse("15" in tasks)
+        self.assertFalse(15 in tasks)
         completed = load_completed_file()
         self.assertFalse("Task 15" in completed)
 
