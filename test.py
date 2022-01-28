@@ -87,7 +87,7 @@ class SimpleTest(unittest.TestCase):
         self.assert_stdout("add", ["15", "Task 15"], "Added task: \"Task 15\" with priority 15")
         self.assert_stdout("delete", ["15"], "Deleted item with priority 15")
         tasks = load_tasks_file()
-        self.assertFalse("15" in tasks)
+        self.assertFalse(15 in tasks)
         completed = load_completed_file()
         self.assertFalse("Task 15" in completed)
 
