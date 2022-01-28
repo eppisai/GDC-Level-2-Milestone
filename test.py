@@ -76,7 +76,7 @@ class SimpleTest(unittest.TestCase):
         self.assert_stdout("add", ["10", "Task 10"], "Added task: \"Task 10\" with priority 10")
         self.assert_stdout("done", ["10"], "Marked item as done.")
         tasks = load_tasks_file()
-        self.assertFalse("10" in tasks)
+        self.assertFalse(10 in tasks)
         completed = load_completed_file()
         self.assertTrue("Task 10" in completed)
 
