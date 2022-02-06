@@ -62,17 +62,57 @@ $ python tasks.py help # Show usage
 $ python tasks.py report # Statistics"""
         )
 
+    def __increment_priority(self, priority):
+        if priority in self.current_items:
+            self.__increment_priority(priority+1)
+        self.current_items[priority] = self.current_items[priority - 1]
+
     def add(self, args):
-        pass
+        priority = int(args[0])
+        if priority in self.current_items:
+            self.__increment_priority(priority + 1)
+        task = " ".join(args[1:])
+        self.current_items[priority] = task
+        self.write_current()
+        print(f'Added task: "{task}" with priority {priority}')
 
     def done(self, args):
-        pass
+        priority = int(args[0])
+        if priority in self.current_items:
+            self.completed_items.append(self.current_items[priority])
+            del self.current_items[priority]
+            print('Marked item as done.')
+        else:
+            print(
+                f"Error: no incomplete item with priority {priority} exists.")
+
+        self.write_completed()
+        self.write_current()
 
     def delete(self, args):
-        pass
+        priority = int(args[0])
+        if self.current_items.pop(priority, None):
+            self.write_current()
+            print(f"Deleted item with priority {priority}")
+        else:
+            print(
+                f"Error: item with priority {priority} does not exist. Nothing deleted."
+            )
 
     def ls(self):
-        pass
+        i = 1
+        for key, value in self.current_items.items():
+            print(f"{i}. {value} [{key}]")
+            i = i + 1
 
     def report(self):
-        pass
+        print(f"Pending : {len(self.current_items)}")
+        i = 1
+        for key, value in self.current_items.items():
+            print(f"{i}. {value} [{key}]")
+            i = i + 1
+        i = 1
+        print(f"\nCompleted : {len(self.completed_items)}")
+        for item in self.completed_items:
+            print(f"{i}. {item}")
+            i = i + 1
